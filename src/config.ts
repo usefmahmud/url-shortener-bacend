@@ -34,4 +34,13 @@ export const CONFIG = {
 
     return expiration;
   },
+
+  getMongoDBURI: () => {
+    const uri = process.env.MONGODB_URI;
+    if (!uri) {
+      throw new Error("MONGODB_URI is not defined");
+    }
+
+    return uri;
+  },
 };

@@ -30,11 +30,9 @@ authRoute.post(
       return error(c, "Email already in use", 400);
     }
 
-    const userId = uuidv7();
     const passwordHash = await bcrypt.hash(password, 10);
 
     const newUser = new User({
-      id: userId,
       email,
       passwordHash,
     });

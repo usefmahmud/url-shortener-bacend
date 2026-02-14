@@ -1,9 +1,10 @@
 import { Hono } from "hono";
-import { ZodError } from "zod";
 import { statsRoute } from "./routes/stats.route";
 import { authRoute } from "./routes/auth.route";
+import { connectDB } from "./db/connect";
 
 const app = new Hono();
+connectDB();
 
 app.get("/", (c) => {
   return c.text("URL Shortener API is running!");
