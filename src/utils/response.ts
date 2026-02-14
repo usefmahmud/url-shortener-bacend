@@ -13,6 +13,7 @@ export const error = (
   c: Context,
   message: string,
   status: ContentfulStatusCode = 500,
+  errors: unknown = [],
 ) => {
-  return c.json({ status: "error", message }, status);
+  return c.json({ status: "error", message, errors }, status);
 };
