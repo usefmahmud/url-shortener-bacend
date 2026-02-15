@@ -1,5 +1,5 @@
 import { Hook } from "@hono/zod-validator";
-import { Env } from "hono";
+import { Context, Env } from "hono";
 import { error } from "./response";
 
 export const validationHook: Hook<any, Env, any> = (result, c) => {
@@ -12,3 +12,5 @@ export const validationHook: Hook<any, Env, any> = (result, c) => {
     return error(c, "Validation failed", 400, errors);
   }
 };
+
+export type JsonContext<T> = Context<{}, any, { out: { json: T } }>;
