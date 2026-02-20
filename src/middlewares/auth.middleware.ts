@@ -18,7 +18,7 @@ export const authMiddleware = async (c: Context, next: Next) => {
       "HS256",
     );
 
-    c.set("userId", payload);
+    c.set("user", payload);
 
     await next();
   } catch {

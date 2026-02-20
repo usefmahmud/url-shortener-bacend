@@ -13,4 +13,17 @@ export const validationHook: Hook<any, Env, any> = (result, c) => {
   }
 };
 
+export type Variables = {
+  user: {
+    userId: string;
+    exp: number;
+  };
+};
+
 export type JsonContext<T> = Context<{}, any, { out: { json: T } }>;
+
+export type AuthJsonContext<T> = Context<
+  { Variables: Variables },
+  any,
+  { out: { json: T } }
+>;
