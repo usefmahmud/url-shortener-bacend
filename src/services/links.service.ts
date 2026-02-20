@@ -1,3 +1,4 @@
+import { getRedisClient } from "../db/redis";
 import { LinkModel } from "../models/link.modal";
 import { generateAlias } from "../utils/links";
 
@@ -14,10 +15,17 @@ export class LinksService {
     const newLink = new LinkModel({
       originalUrl,
       alias,
-      userId
+      userId,
     });
 
     await newLink.save();
+
+    getRedisClient().set(alias, originalUrl, {
+      expiration: {
+        type: "EX",
+        value: 60 * 60 * 24, // 24 hours
+      },
+    });
 
     return newLink;
   }

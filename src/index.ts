@@ -4,9 +4,12 @@ import { authRoute } from "./routes/auth.route";
 import { connectDB } from "./db/connect";
 import { linksRoute } from "./routes/linksRoute.route";
 import { authMiddleware } from "./middlewares/auth.middleware";
+import { connectRedis } from "./db/redis";
 
 const app = new Hono();
+
 connectDB();
+connectRedis();
 
 app.get("/", (c) => {
   return c.text("URL Shortener API is running!");

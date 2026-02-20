@@ -43,4 +43,24 @@ export const CONFIG = {
 
     return uri;
   },
+
+  getRedisConfig: () => {
+    const host = process.env.REDIS_HOST;
+    const port = process.env.REDIS_PORT;
+    const username = process.env.REDIS_USERNAME;
+    const password = process.env.REDIS_PASSWORD;
+
+    if (!host || !port || !username || !password) {
+      throw new Error(
+        "REDIS_HOST, REDIS_PORT, REDIS_USERNAME, and REDIS_PASSWORD must be defined",
+      );
+    }
+
+    return {
+      host,
+      port: parseInt(port),
+      username,
+      password,
+    };
+  },
 };
