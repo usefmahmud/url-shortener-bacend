@@ -29,6 +29,28 @@ export class LinksService {
 
     return newLink;
   }
+
+  async getOriginalUrl(alias: string) {
+    const cachedUrl = await getRedisClient().get(alias);
+
+    if (cachedUrl) {
+      return cachedUrl;
+    }
+
+    const link = await LinkModel.findOne({ alias });
+
+    if (link) {
+      getRedisClient().set(alias, link.originalUrl, {
+        expiration: {
+          type: "EX",
+          value: 60 * 60 * 24, // 24 hours
+        },
+      });
+      return link.originalUrl;
+    }
+
+    return null;
+  }
 }
 
 export const linksService = new LinksService();

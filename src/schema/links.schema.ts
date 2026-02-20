@@ -17,4 +17,17 @@ export const linkCreateSchema = z.object({
     .openapi({ example: "my-short-link" }),
 });
 
+export const linkGetSchema = z.object({
+  alias: z
+    .string()
+    .min(3, "Alias must be at least 3 characters")
+    .max(20, "Alias must be at most 20 characters")
+    .regex(
+      /^[a-zA-Z0-9_-]+$/,
+      "Alias can only contain letters, numbers, underscores, and hyphens",
+    )
+    .openapi({ example: "my-short-link" }),
+});
+
 export type LinkCreateInput = z.infer<typeof linkCreateSchema>;
+export type LinkGetInput = z.infer<typeof linkGetSchema>;

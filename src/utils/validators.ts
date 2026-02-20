@@ -25,5 +25,5 @@ export type JsonContext<T> = Context<{}, any, { out: { json: T } }>;
 export type AuthJsonContext<T> = Context<
   { Variables: Variables },
   any,
-  { out: { json: T } }
+  { out: { json: T; param: T } }
 >;
